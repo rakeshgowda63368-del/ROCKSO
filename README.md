@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ROCKSO™ Store — Premium React Starter
 
 A fully responsive, production-ready front-end storefront for ROCKSO, built with **React + Vite** and plain CSS.
@@ -71,3 +72,6 @@ Your ROCKSO logo is at `public/rockso-logo.jpg` and is used in:
 
 Replace the file to update it everywhere instantly.
 
+=======
+# ROCKSO
+>>>>>>> 26d9ab4176eb8db47759b303df72e5d051158e0e
