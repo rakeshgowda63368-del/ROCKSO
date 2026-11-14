@@ -193,21 +193,26 @@ input { font-family: inherit; }
    ══════════════════════════════════════════ */
 .hero {
   position: relative;
-  background: var(--dark);
+  background: #000000;
   color: var(--white);
   overflow: hidden;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-/* Full image — zero quality loss */
+/* Original crisp image - no scaling beyond native, black letterboxing on empty sides */
 .hero-img {
   display: block;
-  width: 100%;
+  max-width: 100%;
+  width: auto;
   height: auto;
+  max-height: 82vh;
   object-fit: contain;
-  object-position: center;
-  vertical-align: top;
-  image-rendering: high-quality;
+  vertical-align: middle;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
   filter: none;
   -webkit-filter: none;
 }
@@ -1352,8 +1357,8 @@ input { font-family: inherit; }
   }
 
   /* Hero mobile */
-  .hero { display: block; }
-  .hero-img { width: 100%; height: auto; }
+  .hero { display: flex; justify-content: center; background: #000000; }
+  .hero-img { max-width: 100%; height: auto; }
   .hero-cta-block { bottom: 40px; left: 5%; gap: 8px; flex-direction: column; }
   .hero-cta-block .btn { width: 100%; justify-content: center; }
   .hero-stats { display: none; }
