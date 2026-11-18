@@ -146,24 +146,40 @@ export default function App() {
 
         {/* ── MANIFESTO ── */}
         <section className="manifesto" id="story">
+          <div className="manifesto-bg-watermark">ROCKSO</div>
           <div className="manifesto-inner">
             <div className="manifesto-label">
               <span className="eyebrow">THE ROCKSO MINDSET</span>
               <div className="label-line" />
+              <span className="manifesto-est">EST. 2026</span>
             </div>
             <div className="manifesto-text">
               <h2>
                 STYLE ISN'T GIVEN.<br />
-                <span>IT'S DESIGNED.</span>
+                <span className="outline-text">IT'S DESIGNED.</span>
               </h2>
-              <p>
-                We believe what you wear should say something before you do.
-                Built around individuality, confidence and everyday expression —
-                ROCKSO is for those who define the standard, not follow it.
+              <p className="manifesto-lead">
+                We believe what you wear should say something before you do. Built around individuality, confidence, and uncompromising streetwear silhouettes.
               </p>
-              <a className="btn btn-black" href="#shop">
-                EXPLORE THE BRAND <ArrowRight size={14} />
-              </a>
+              <div className="manifesto-pillars">
+                <div className="pillar-item">
+                  <strong>01 / RAW</strong>
+                  <span>Heavyweight fabrics with unrefined industrial aesthetics.</span>
+                </div>
+                <div className="pillar-item">
+                  <strong>02 / CRAFTED</strong>
+                  <span>Engineered boxy cuts built specifically for all-day comfort.</span>
+                </div>
+                <div className="pillar-item">
+                  <strong>03 / UNCOMMON</strong>
+                  <span>Limited drops. Built for those who set the trend, never chase it.</span>
+                </div>
+              </div>
+              <div className="manifesto-action">
+                <a className="btn btn-black" href="#shop">
+                  EXPLORE THE COLLECTION <ArrowRight size={14} />
+                </a>
+              </div>
             </div>
           </div>
         </section>
