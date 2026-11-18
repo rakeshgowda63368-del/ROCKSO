@@ -186,22 +186,30 @@ export default function App() {
 
         {/* ── FEATURED BANNER ── */}
         <section className="featured-banner">
-          <div className="featured-left">
-            <div className="featured-image featured-img-1" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}product-03.jpg)` }} />
-            <div className="featured-card">
+          <a href="#shop" className="featured-card-interactive featured-left">
+            <div className="featured-image-wrapper">
+              <img src={`${import.meta.env.BASE_URL}product-03.jpg`} alt="Signature Collection" className="featured-img" />
+            </div>
+            <div className="featured-card-overlay">
               <span className="eyebrow light">DROP 01</span>
               <h3>SIGNATURE COLLECTION</h3>
-              <a href="#shop" className="btn btn-white sm">SHOP TEES <ArrowRight size={12} /></a>
+              <div className="btn btn-white sm featured-btn">
+                SHOP TEES <ArrowRight size={12} />
+              </div>
             </div>
-          </div>
-          <div className="featured-right">
-            <div className="featured-image featured-img-2" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}product-02.jpg)` }} />
-            <div className="featured-card">
+          </a>
+          <a href="#shop" className="featured-card-interactive featured-right">
+            <div className="featured-image-wrapper">
+              <img src={`${import.meta.env.BASE_URL}product-02.jpg`} alt="Hoodies & Layers" className="featured-img" />
+            </div>
+            <div className="featured-card-overlay">
               <span className="eyebrow light">HEAVYWEIGHT</span>
               <h3>HOODIES & LAYERS</h3>
-              <a href="#shop" className="btn btn-white sm">SHOP HOODIES <ArrowRight size={12} /></a>
+              <div className="btn btn-white sm featured-btn">
+                SHOP HOODIES <ArrowRight size={12} />
+              </div>
             </div>
-          </div>
+          </a>
         </section>
 
         {/* ── SHOP SECTION ── */}
