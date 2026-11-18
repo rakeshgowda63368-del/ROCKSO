@@ -154,7 +154,7 @@ export default function App() {
             <div className="manifesto-text">
               <h2>
                 STYLE ISN'T GIVEN.<br />
-                <span>IT'S DEFINED.</span>
+                <span>IT'S DESIGNED.</span>
               </h2>
               <p>
                 We believe what you wear should say something before you do.
