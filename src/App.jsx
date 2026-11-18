@@ -187,7 +187,7 @@ export default function App() {
         {/* ── FEATURED BANNER ── */}
         <section className="featured-banner">
           <div className="featured-left">
-            <div className="featured-image featured-img-1" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}product-01.jpg)` }} />
+            <div className="featured-image featured-img-1" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}product-03.jpg)` }} />
             <div className="featured-card">
               <span className="eyebrow light">DROP 01</span>
               <h3>SIGNATURE COLLECTION</h3>
