@@ -29,11 +29,12 @@ export default function ProductCard({ product, onQuickAdd, onSelectProduct }) {
       <div className="product-image-wrap">
         <img src={product.image} alt={product.name} loading="lazy" />
 
-        {/* Badges */}
-        <div className="badge-row">
-          {product.badge && <span className="product-badge">{product.badge}</span>}
-          {discount && <span className="product-badge discount">−{discount}%</span>}
-        </div>
+        {/* Badge - single, compact pill in corner */}
+        {product.badge && (
+          <div className="badge-row">
+            <span className="product-badge">{product.badge}</span>
+          </div>
+        )}
 
         {/* Wishlist */}
         <button
@@ -65,7 +66,10 @@ export default function ProductCard({ product, onQuickAdd, onSelectProduct }) {
         <div className="price-block">
           <span className="price-current">₹{product.price.toLocaleString('en-IN')}</span>
           {product.compareAt && (
-            <del className="price-original">₹{product.compareAt.toLocaleString('en-IN')}</del>
+            <>
+              <del className="price-original">₹{product.compareAt.toLocaleString('en-IN')}</del>
+              {discount && <span className="price-discount">({discount}% off)</span>}
+            </>
           )}
         </div>
       </div>
