@@ -1,14 +1,14 @@
 export const products = [
   {
-    id: 'rs-tee-001',
-    name: 'ROCKSO Signature Tee',
+    id: 'rs-polo-001',
+    name: 'Play Bold Champion Polo',
     category: 'T-Shirts',
-    price: 799,
-    compareAt: 999,
-    badge: 'BESTSELLER',
+    price: 999,
+    compareAt: 1299,
+    badge: 'LIMITED EDITION',
     color: 'Pure White',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Heavyweight oversized graphic tee with custom Shiva artwork and chest trident accent. 100% premium combed cotton, 300+ GSM with dropped shoulders.',
+    description: 'Special edition tribute polo featuring dual chest embroidery and a high-definition Virat trophy celebratory back artwork. Crafted with premium pique cotton and gold-tipped collar detailing.',
     image: `${import.meta.env.BASE_URL}product-01.jpg`
   },
   {
