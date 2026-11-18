@@ -21,7 +21,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="footer-brand">
             <a href="#home" className="footer-logo-wrap">
-              <img src="/rockso-logo.jpg" alt="ROCKSO™" className="footer-logo" />
+              <img src={`${import.meta.env.BASE_URL}rockso-logo.jpg`} alt="ROCKSO™" className="footer-logo" />
             </a>
             <p className="footer-tagline">DEFINE YOUR OWN.</p>
             <div className="footer-social">

@@ -25,7 +25,7 @@ export default function Header({ cartCount, onCartClick, onSearchClick }) {
 
         {/* Logo */}
         <a className="logo-wrap" href="#home" aria-label="ROCKSO home">
-          <img src="/rockso-logo.jpg" alt="ROCKSO™" className="header-logo" />
+          <img src={`${import.meta.env.BASE_URL}rockso-logo.jpg`} alt="ROCKSO™" className="header-logo" />
         </a>
 
         {/* Desktop Nav */}

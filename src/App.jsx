@@ -108,7 +108,7 @@ export default function App() {
       <main>
         {/* ── HERO ── */}
         <section className="hero" id="home-hero">
-          <img src="/hero-bg.jpg" alt="ROCKSO — Define Your Own" className="hero-img" loading="eager" fetchPriority="high" decoding="sync" />
+          <img src={`${import.meta.env.BASE_URL}hero-bg.jpg`} alt="ROCKSO — Define Your Own" className="hero-img" loading="eager" fetchPriority="high" decoding="sync" />
           <div className="hero-overlay" />
 
           {/* CTA pinned bottom-left */}
