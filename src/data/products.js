@@ -1,5 +1,17 @@
 export const products = [
   {
+    id: 'rs-tee-001',
+    name: 'ROCKSO Signature Tee',
+    category: 'T-Shirts',
+    price: 799,
+    compareAt: 999,
+    badge: 'BESTSELLER',
+    color: 'Pure White',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Heavyweight oversized graphic tee with custom Shiva artwork and chest trident accent. 100% premium combed cotton, 300+ GSM with dropped shoulders.',
+    image: `${import.meta.env.BASE_URL}product-01.jpg`
+  },
+  {
     id: 'rs-polo-001',
     name: 'Play Bold Champion Polo',
     category: 'T-Shirts',
@@ -9,19 +21,7 @@ export const products = [
     color: 'Pure White',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     description: 'Special edition tribute polo featuring dual chest embroidery and a high-definition Virat trophy celebratory back artwork. Crafted with premium pique cotton and gold-tipped collar detailing.',
-    image: `${import.meta.env.BASE_URL}product-01.jpg`
-  },
-  {
-    id: 'rs-tee-002',
-    name: 'Define Your Own Tee',
-    category: 'T-Shirts',
-    price: 899,
-    compareAt: null,
-    badge: 'NEW DROP',
-    color: 'Off White',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Minimal front branding with a statement-making back graphic. 100% ring-spun cotton, pre-washed for softness.',
-    image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=900&q=85'
+    image: `${import.meta.env.BASE_URL}product-03.jpg`
   },
   {
     id: 'rs-tee-003',
