@@ -389,7 +389,7 @@ input { font-family: inherit; }
   font-size: clamp(140px, 22vw, 320px);
   font-weight: 900;
   letter-spacing: -6px;
-  color: rgba(0, 0, 0, 0.035);
+  color: rgba(0, 0, 0, 0.085);
   pointer-events: none;
   user-select: none;
   line-height: 0.8;

@@ -159,7 +159,7 @@ export default function App() {
                 <span className="outline-text">IT'S DESIGNED.</span>
               </h2>
               <p className="manifesto-lead">
-                We believe what you wear should say something before you do. Built around individuality, confidence, and uncompromising streetwear silhouettes.
+                We believe what you wear should say something before you do. Our brand is built around individuality, confidence, and uncompromising streetwear silhouettes.
               </p>
               <div className="manifesto-pillars">
                 <div className="pillar-item">
