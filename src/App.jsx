@@ -5,6 +5,7 @@ import {
 } from 'lucide-react'
 import Header from './components/Header'
 import ProductCard from './components/ProductCard'
+import ProductDetailPage from './components/ProductDetailPage'
 import CartDrawer from './components/CartDrawer'
 import SearchOverlay from './components/SearchOverlay'
 import Footer from './components/Footer'
@@ -18,9 +19,45 @@ export default function App() {
   const [cartOpen, setCartOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [quickProduct, setQuickProduct] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [selectedSize, setSelectedSize] = useState('')
   const [notice, setNotice] = useState('')
   const [sizeError, setSizeError] = useState(false)
+
+  // Handle hash for product detail page (Flipkart / Amazon style URL)
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash
+      if (hash.startsWith('#product/')) {
+        const id = hash.replace('#product/', '')
+        const found = products.find(p => p.id === id)
+        if (found) {
+          setSelectedProduct(found)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+      } else {
+        setSelectedProduct(null)
+      }
+    }
+    handleHash()
+    window.addEventListener('hashchange', handleHash)
+    return () => window.removeEventListener('hashchange', handleHash)
+  }, [])
+
+  const handleSelectProduct = (product) => {
+    setSelectedProduct(product)
+    window.location.hash = `product/${product.id}`
+  }
+
+  const handleBackToCatalog = () => {
+    setSelectedProduct(null)
+    window.location.hash = 'shop'
+  }
+
+  const handleBuyNow = (product, size) => {
+    addToCart(product, size)
+    setCartOpen(true)
+  }
 
   useEffect(() => {
     localStorage.setItem('rockso-cart', JSON.stringify(cart))
@@ -106,7 +143,17 @@ export default function App() {
       />
 
       <main>
-        {/* ── HERO ── */}
+        {selectedProduct ? (
+          <ProductDetailPage
+            product={selectedProduct}
+            allProducts={products}
+            onBack={handleBackToCatalog}
+            onAddToCart={addToCart}
+            onBuyNow={handleBuyNow}
+          />
+        ) : (
+          <>
+            {/* ── HERO ── */}
         <section className="hero" id="home-hero">
           <img src={`${import.meta.env.BASE_URL}hero-bg.jpg`} alt="ROCKSO — Define Your Own" className="hero-img" loading="eager" fetchPriority="high" decoding="sync" />
           <div className="hero-overlay" />
@@ -186,30 +233,46 @@ export default function App() {
 
         {/* ── FEATURED BANNER ── */}
         <section className="featured-banner">
-          <a href="#shop" className="featured-card-interactive featured-left">
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              const p = products.find(prod => prod.id === 'rs-polo-001')
+              if (p) handleSelectProduct(p)
+            }}
+            className="featured-card-interactive featured-left"
+          >
             <div className="featured-image-wrapper">
               <img src={`${import.meta.env.BASE_URL}product-03.jpg`} alt="Signature Collection" className="featured-img" />
             </div>
             <div className="featured-card-overlay">
-              <span className="eyebrow light">DROP 01</span>
-              <h3>SIGNATURE COLLECTION</h3>
+              <span className="eyebrow light">LIMITED DROP</span>
+              <h3>PLAY BOLD CHAMPION POLO</h3>
               <div className="btn btn-white sm featured-btn">
-                SHOP TEES <ArrowRight size={12} />
+                VIEW PRODUCT <ArrowRight size={12} />
               </div>
             </div>
-          </a>
-          <a href="#shop" className="featured-card-interactive featured-right">
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              const p = products.find(prod => prod.id === 'rs-hoodie-hassan')
+              if (p) handleSelectProduct(p)
+            }}
+            className="featured-card-interactive featured-right"
+          >
             <div className="featured-image-wrapper">
               <img src={`${import.meta.env.BASE_URL}product-02.jpg`} alt="Hoodies & Layers" className="featured-img" />
             </div>
             <div className="featured-card-overlay">
               <span className="eyebrow light">HEAVYWEIGHT</span>
-              <h3>HOODIES & LAYERS</h3>
+              <h3>NAMMA HASSAN HOODIE</h3>
               <div className="btn btn-white sm featured-btn">
-                SHOP HOODIES <ArrowRight size={12} />
+                VIEW PRODUCT <ArrowRight size={12} />
               </div>
             </div>
-          </a>
+          </div>
         </section>
 
         {/* ── SHOP SECTION ── */}
@@ -244,6 +307,7 @@ export default function App() {
                 key={product.id}
                 product={product}
                 onQuickAdd={openQuick}
+                onSelectProduct={handleSelectProduct}
               />
             ))}
           </div>
@@ -323,6 +387,8 @@ export default function App() {
             FOLLOW @ROCKSO_OFFICIAL
           </a>
         </section>
+          </>
+        )}
       </main>
 
       <Footer />
@@ -340,6 +406,7 @@ export default function App() {
       <SearchOverlay
         open={searchOpen}
         onClose={() => setSearchOpen(false)}
+        onSelectProduct={handleSelectProduct}
       />
 
       {/* ── QUICK ADD MODAL ── */}

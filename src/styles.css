@@ -1575,3 +1575,757 @@ input { font-family: inherit; }
   .manifesto h2 { font-size: 48px; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   PRODUCT DETAIL PAGE (PDP) — Amazon & Flipkart Style
+   ═══════════════════════════════════════════════════════════ */
+.pdp-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px 5% 90px;
+  box-sizing: border-box;
+}
+
+.pdp-breadcrumb-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--grey-200);
+  flex-wrap: wrap;
+}
+
+.pdp-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  background: var(--white);
+  color: var(--black);
+  border: 1px solid var(--grey-300);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.pdp-back-btn:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.pdp-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--grey-400);
+  font-weight: 600;
+}
+.crumb-link {
+  cursor: pointer;
+  color: var(--grey-600);
+  transition: color .2s;
+}
+.crumb-link:hover {
+  color: var(--black);
+  text-decoration: underline;
+}
+.crumb-current {
+  color: var(--black);
+  font-weight: 700;
+  max-width: 280px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* PDP Grid */
+.pdp-grid {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  gap: 48px;
+  align-items: start;
+}
+
+.pdp-gallery-sticky {
+  position: sticky;
+  top: 96px;
+}
+
+.pdp-main-image-wrap {
+  position: relative;
+  aspect-ratio: 0.85;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--grey-200);
+}
+
+.pdp-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.pdp-main-image-wrap:hover .pdp-main-image {
+  transform: scale(1.04);
+}
+
+.pdp-image-badges {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+}
+
+.pdp-badge {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 5px 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.pdp-badge.assured {
+  background: #2874f0;
+  color: #fff;
+}
+
+.pdp-image-actions {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2;
+}
+
+.pdp-icon-action {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform .2s ease;
+}
+.pdp-icon-action:hover {
+  transform: scale(1.08);
+}
+.pdp-icon-action.active {
+  background: #ffe4e6;
+  border-color: #f43f5e;
+}
+
+.pdp-toast {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  z-index: 3;
+}
+
+/* Desktop Action Buttons under Image (Flipkart style) */
+.pdp-desktop-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-pdp-cart {
+  height: 48px;
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.btn-pdp-cart:hover {
+  opacity: .88;
+}
+
+.btn-pdp-buy {
+  height: 48px;
+  background: #fb641b;
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(251,100,27,0.3);
+  transition: opacity .2s, transform .15s;
+}
+.btn-pdp-buy:hover {
+  opacity: .92;
+  transform: translateY(-1px);
+}
+
+/* Details Column */
+.pdp-brand {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--grey-400);
+}
+.pdp-title {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 800;
+  margin: 6px 0 6px;
+  line-height: 1.25;
+}
+.pdp-color-label {
+  font-size: 12px;
+  color: var(--grey-600);
+  margin-bottom: 12px;
+}
+
+.pdp-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--grey-200);
+}
+.pdp-rating-badge {
+  background: #388e3c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.pdp-rating-count {
+  font-size: 12px;
+  color: var(--grey-600);
+  font-weight: 600;
+}
+.pdp-verified-tag {
+  font-size: 11.5px;
+  color: #2874f0;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Price Card */
+.pdp-price-card {
+  padding: 16px 0;
+}
+.pdp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.pdp-price {
+  font-size: 32px;
+  font-weight: 900;
+}
+.pdp-mrp {
+  font-size: 16px;
+  color: var(--grey-400);
+  text-decoration: line-through;
+}
+.pdp-discount {
+  font-size: 16px;
+  font-weight: 800;
+  color: #388e3c;
+}
+.pdp-tax-note {
+  font-size: 11px;
+  color: var(--grey-400);
+  margin-top: 4px;
+}
+
+/* Flipkart / Amazon Offers Box */
+.pdp-offers-box {
+  background: #fdfdfd;
+  border: 1px dashed #2874f0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 16px 0;
+}
+.pdp-offers-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.pdp-offers-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #222;
+}
+.pdp-offers-list li {
+  margin-bottom: 6px;
+}
+.pdp-offers-list li span {
+  color: #2874f0;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+/* Size Section */
+.pdp-size-section {
+  margin: 22px 0;
+}
+.pdp-size-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.pdp-size-chart-link {
+  background: none;
+  border: none;
+  color: #2874f0;
+  font-weight: 700;
+  font-size: 11px;
+  cursor: pointer;
+  letter-spacing: .5px;
+}
+.pdp-size-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pdp-size-chip {
+  min-width: 48px;
+  height: 42px;
+  border: 1.5px solid var(--grey-300);
+  background: var(--white);
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.pdp-size-chip:hover {
+  border-color: var(--black);
+}
+.pdp-size-chip.active {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+.pdp-size-error {
+  color: #e11d48;
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* Delivery Card */
+.pdp-delivery-card {
+  background: #fafafa;
+  border: 1px solid var(--grey-200);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 22px 0;
+}
+.pdp-delivery-title {
+  font-size: 12.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.pdp-pincode-input-wrap {
+  display: flex;
+  gap: 8px;
+  max-width: 300px;
+  margin-bottom: 12px;
+}
+.pdp-pincode-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--grey-300);
+  border-radius: 4px;
+  font-size: 12px;
+  outline: none;
+}
+.pdp-pincode-input:focus {
+  border-color: #2874f0;
+}
+.pdp-pincode-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0 16px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.pdp-delivery-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 11.5px;
+  border-top: 1px solid var(--grey-200);
+  padding-top: 10px;
+}
+.pdp-perk-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pdp-perk-row .perk-icon {
+  color: #388e3c;
+  flex-shrink: 0;
+}
+
+/* Specs Box */
+.pdp-specs-box {
+  margin: 24px 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--grey-200);
+}
+.pdp-specs-heading {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.pdp-description {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--grey-700);
+  margin-bottom: 16px;
+}
+.pdp-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.pdp-specs-table th {
+  text-align: left;
+  width: 32%;
+  padding: 9px 8px;
+  color: var(--grey-500);
+  font-weight: 600;
+  border-bottom: 1px solid var(--grey-200);
+}
+.pdp-specs-table td {
+  padding: 9px 8px;
+  color: var(--black);
+  font-weight: 600;
+  border-bottom: 1px solid var(--grey-200);
+}
+
+/* Features */
+.pdp-features-box {
+  margin: 24px 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--grey-200);
+}
+.pdp-features-box h3 {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.pdp-features-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pdp-features-box li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #333;
+}
+.pdp-features-box li svg {
+  color: #388e3c;
+  flex-shrink: 0;
+}
+
+/* Reviews Box */
+.pdp-reviews-box {
+  margin: 28px 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--grey-200);
+}
+.pdp-reviews-box h3 {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.pdp-review-summary {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  background: #fbfbfb;
+  border: 1px solid var(--grey-200);
+  padding: 18px 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.pdp-big-score {
+  text-align: center;
+  min-width: 100px;
+}
+.pdp-big-score .score-num {
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+}
+.pdp-big-score .score-stars {
+  color: #ff9f00;
+  font-size: 13px;
+  display: block;
+  margin: 4px 0;
+}
+.pdp-big-score .score-label {
+  font-size: 10px;
+  color: var(--grey-500);
+}
+.pdp-rating-bars {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+.bar-track {
+  flex: 1;
+  height: 6px;
+  background: #e5e5e5;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: #388e3c;
+  border-radius: 999px;
+}
+.bar-pct {
+  font-size: 10px;
+  color: var(--grey-500);
+  width: 28px;
+  text-align: right;
+}
+
+.pdp-review-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pdp-review-item {
+  background: #fff;
+  border: 1px solid var(--grey-200);
+  padding: 16px;
+  border-radius: 6px;
+}
+.review-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.review-stars {
+  color: #388e3c;
+  font-size: 11px;
+}
+.review-title {
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.review-body {
+  font-size: 12px;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.review-author {
+  font-size: 10.5px;
+  color: var(--grey-400);
+}
+.review-author .verified {
+  color: #388e3c;
+  font-weight: 700;
+}
+
+/* Related section */
+.pdp-related-section {
+  margin-top: 60px;
+  padding-top: 36px;
+  border-top: 2px solid var(--black);
+}
+.pdp-related-section h2 {
+  font: 900 24px var(--font-display);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.pdp-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.pdp-related-card {
+  cursor: pointer;
+}
+.pdp-related-card img {
+  width: 100%;
+  aspect-ratio: .8;
+  object-fit: cover;
+  border-radius: 4px;
+  transition: transform .3s ease;
+}
+.pdp-related-card:hover img {
+  transform: scale(1.03);
+}
+.pdp-related-card h4 {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 8px 0 2px;
+}
+.pdp-related-card p {
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Mobile Sticky Bottom Bar */
+.pdp-mobile-sticky-bar {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .pdp-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .pdp-gallery-sticky {
+    position: static;
+  }
+  .pdp-desktop-actions {
+    display: none;
+  }
+  .pdp-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Fixed sticky bar on mobile */
+  .pdp-mobile-sticky-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #ffffff;
+    box-shadow: 0 -3px 14px rgba(0,0,0,0.12);
+    z-index: 100;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    box-sizing: border-box;
+  }
+  .pdp-sticky-price {
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-price-current {
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+  .mobile-price-mrp {
+    font-size: 11px;
+    color: var(--grey-400);
+    text-decoration: line-through;
+  }
+  .pdp-sticky-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .mobile-btn-cart {
+    height: 40px;
+    padding: 0 14px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .mobile-btn-buy {
+    height: 40px;
+    padding: 0 16px;
+    background: #fb641b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(251,100,27,0.3);
+  }
+}
+

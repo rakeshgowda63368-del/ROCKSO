@@ -1,7 +1,7 @@
 export const products = [
   {
     id: 'rs-tee-001',
-    name: 'ROCKSO Signature Tee',
+    name: 'ROCKSO Signature Shiva Oversized Tee',
     category: 'T-Shirts',
     price: 799,
     compareAt: 999,
@@ -9,7 +9,37 @@ export const products = [
     color: 'Pure White',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     description: 'Heavyweight oversized graphic tee with custom Shiva artwork and chest trident accent. 100% premium combed cotton, 300+ GSM with dropped shoulders.',
-    image: `${import.meta.env.BASE_URL}product-01.jpg`
+    image: `${import.meta.env.BASE_URL}product-01.jpg`,
+    rating: 4.9,
+    ratingCount: 184,
+    features: [
+      '100% Super Combed Heavyweight Cotton (300+ GSM)',
+      'High-Density Screen Printed Shiva Back Graphic',
+      'Dropped Shoulders with Streetwear Boxy Fit',
+      'Pre-shrunk fabric to prevent shrinking after wash',
+      'Ribbed lycra neck collar for zero sag'
+    ]
+  },
+  {
+    id: 'rs-hoodie-ngv',
+    name: 'Never Give Up #18 Sleeveless Hoodie',
+    category: 'Hoodies',
+    price: 999,
+    compareAt: 1299,
+    badge: 'NEW DROP',
+    color: 'Jet Black',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Bold sleeveless hoodie with #18 chest print and "Never Give Up" brush-script back graphic. Premium cotton-poly blend, athletic cut with a street-ready silhouette.',
+    image: `${import.meta.env.BASE_URL}product-02-ngv.jpg`,
+    rating: 4.8,
+    ratingCount: 96,
+    features: [
+      'Dual Chest #18 and Brush-Script Back Artwork',
+      'Athletic Sleeveless Cut with Reinforced Armholes',
+      'Double-Layered Hood with Premium Drawcords',
+      'Moisture-Wicking Breathable Cotton Poly Blend',
+      'Deep Kangaroo Front Pocket'
+    ]
   },
   {
     id: 'rs-polo-001',
@@ -17,11 +47,41 @@ export const products = [
     category: 'T-Shirts',
     price: 999,
     compareAt: 1299,
-    badge: 'COMING SOON',
+    badge: 'LIMITED EDITION',
     color: 'Pure White',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     description: 'Special edition tribute polo featuring dual chest embroidery and a high-definition Virat trophy celebratory back artwork. Crafted with premium pique cotton and gold-tipped collar detailing.',
-    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=85'
+    image: `${import.meta.env.BASE_URL}product-03.jpg`,
+    rating: 4.9,
+    ratingCount: 142,
+    features: [
+      'Premium 240 GSM Heavy Pique Cotton',
+      'Gold Tipped Collar & Sleeve Ribs',
+      'Embroidered Golden Lion Crest & Play Bold Insignia',
+      'High-Definition Virat Championship Back Artwork',
+      'Side Slits for Added Comfort and Flexibility'
+    ]
+  },
+  {
+    id: 'rs-hoodie-hassan',
+    name: 'Namma Hassan Heavyweight Hoodie',
+    category: 'Hoodies',
+    price: 1499,
+    compareAt: 1799,
+    badge: 'HEAVYWEIGHT',
+    color: 'Jet Black',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Exclusive Kannada heritage typography on front with detailed Hassan historical monuments & landscape back artwork. Ultra-heavy 420 GSM fleece.',
+    image: `${import.meta.env.BASE_URL}product-02.jpg`,
+    rating: 5.0,
+    ratingCount: 78,
+    features: [
+      '420 GSM Heavyweight Brushed Fleece Inside',
+      'Kannada "Namma Hassan" Front Lettering',
+      'Intricate Architecture & Monument Back Map Art',
+      'Extra Large Double-Stitched Hood',
+      'Thumbhole Ribbed Cuffs for Cold Weather'
+    ]
   },
   {
     id: 'rs-tee-003',

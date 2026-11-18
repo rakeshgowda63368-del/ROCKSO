@@ -1,14 +1,31 @@
 import { Plus, Heart } from 'lucide-react'
 import { useState } from 'react'
 
-export default function ProductCard({ product, onQuickAdd }) {
+export default function ProductCard({ product, onQuickAdd, onSelectProduct }) {
   const [wished, setWished] = useState(false)
   const discount = product.compareAt
     ? Math.round(((product.compareAt - product.price) / product.compareAt) * 100)
     : null
 
+  const handleCardClick = () => {
+    if (onSelectProduct) {
+      onSelectProduct(product)
+    }
+  }
+
   return (
-    <article className="product-card">
+    <article
+      className="product-card"
+      onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          handleCardClick()
+        }
+      }}
+    >
       <div className="product-image-wrap">
         <img src={product.image} alt={product.name} loading="lazy" />
 
@@ -28,7 +45,13 @@ export default function ProductCard({ product, onQuickAdd }) {
         </button>
 
         {/* Quick Add */}
-        <button className="quick-add" onClick={() => onQuickAdd(product)}>
+        <button
+          className="quick-add"
+          onClick={(e) => {
+            e.stopPropagation()
+            onQuickAdd(product)
+          }}
+        >
           <Plus size={14} /> QUICK ADD
         </button>
       </div>

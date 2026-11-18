@@ -2,7 +2,7 @@ import { X, Search as SearchIcon } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 import { products } from '../data/products'
 
-export default function SearchOverlay({ open, onClose }) {
+export default function SearchOverlay({ open, onClose, onSelectProduct }) {
   const [query, setQuery] = useState('')
   const inputRef = useRef(null)
 
@@ -43,7 +43,14 @@ export default function SearchOverlay({ open, onClose }) {
         {results.length > 0 && (
           <div className="search-results">
             {results.map(p => (
-              <div key={p.id} className="search-result-item" onClick={onClose}>
+              <div
+                key={p.id}
+                className="search-result-item"
+                onClick={() => {
+                  if (onSelectProduct) onSelectProduct(p)
+                  onClose()
+                }}
+              >
                 <img src={p.image} alt={p.name} />
                 <div>
                   <span className="search-category">{p.category}</span>
