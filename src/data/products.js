@@ -12,16 +12,16 @@ export const products = [
     image: `${import.meta.env.BASE_URL}product-01.jpg`
   },
   {
-    id: 'rs-hoodie-hassan',
-    name: 'Namma Hassan Heavyweight Hoodie',
-    category: 'Hoodies',
-    price: 1499,
-    compareAt: 1799,
+    id: 'rs-tee-002',
+    name: 'Define Your Own Tee',
+    category: 'T-Shirts',
+    price: 899,
+    compareAt: null,
     badge: 'NEW DROP',
-    color: 'Jet Black',
+    color: 'Off White',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Heavyweight 400+ GSM fleece hoodie celebrating heritage with bold front Kannada lettering and an intricate Hassan landmark back illustration. Features metal eyelet premium hood, kangaroo pocket, and rib-knit cuffs.',
-    image: `${import.meta.env.BASE_URL}product-02.jpg`
+    description: 'Minimal front branding with a statement-making back graphic. 100% ring-spun cotton, pre-washed for softness.',
+    image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=900&q=85'
   },
   {
     id: 'rs-tee-003',
