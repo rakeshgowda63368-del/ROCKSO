@@ -6,10 +6,10 @@ export const products = [
     price: 799,
     compareAt: 999,
     badge: 'BESTSELLER',
-    color: 'Washed Black',
+    color: 'Pure White',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    description: 'A heavyweight everyday essential with a relaxed streetwear fit. 320 GSM cotton. Dropped shoulders, boxy silhouette.',
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85'
+    description: 'Heavyweight oversized graphic tee with custom Shiva artwork and chest trident accent. 100% premium combed cotton, 300+ GSM with dropped shoulders.',
+    image: `${import.meta.env.BASE_URL}product-01.jpg`
   },
   {
     id: 'rs-tee-002',
