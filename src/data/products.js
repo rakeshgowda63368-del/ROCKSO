@@ -17,11 +17,11 @@ export const products = [
     category: 'T-Shirts',
     price: 999,
     compareAt: 1299,
-    badge: 'LIMITED EDITION',
+    badge: 'COMING SOON',
     color: 'Pure White',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     description: 'Special edition tribute polo featuring dual chest embroidery and a high-definition Virat trophy celebratory back artwork. Crafted with premium pique cotton and gold-tipped collar detailing.',
-    image: `${import.meta.env.BASE_URL}product-03.jpg`
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=85'
   },
   {
     id: 'rs-tee-003',
