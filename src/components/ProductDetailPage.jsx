@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
-  Star, ShieldCheck, Truck, RotateCcw, Tag, Check, ShoppingBag,
-  Zap, ArrowLeft, Heart, Share2, MapPin, ChevronRight, CheckCircle2
+  Star, Check, ShoppingBag,
+  Zap, ArrowLeft, Heart, Share2, ChevronRight, CheckCircle2
 } from 'lucide-react'
 
 export default function ProductDetailPage({
@@ -13,8 +13,6 @@ export default function ProductDetailPage({
 }) {
   const [selectedSize, setSelectedSize] = useState('')
   const [sizeError, setSizeError] = useState(false)
-  const [pincode, setPincode] = useState('560001')
-  const [pincodeChecked, setPincodeChecked] = useState(true)
   const [wished, setWished] = useState(false)
   const [copied, setCopied] = useState(false)
   const [activeImage, setActiveImage] = useState(product.image)
@@ -163,27 +161,6 @@ export default function ProductDetailPage({
             <p className="pdp-tax-note">inclusive of all taxes • Free Shipping on this drop</p>
           </div>
 
-          {/* Flipkart / Amazon Offers Box */}
-          <div className="pdp-offers-box">
-            <div className="pdp-offers-title">
-              <Tag size={16} /> Available Offers & Discounts
-            </div>
-            <ul className="pdp-offers-list">
-              <li>
-                <strong>Bank Offer:</strong> 5% Unlimited Cashback on Axis Bank & SBI Credit Cards <span>T&C</span>
-              </li>
-              <li>
-                <strong>Special Price:</strong> Get extra ₹300 off (Price inclusive of discount) <span>T&C</span>
-              </li>
-              <li>
-                <strong>Partner Offer:</strong> Buy 2 or more streetwear items and get an extra 10% instant discount
-              </li>
-              <li>
-                <strong>No Cost EMI:</strong> Available on major credit cards for orders above ₹1,999
-              </li>
-            </ul>
-          </div>
-
           {/* Size Selector */}
           <div className="pdp-size-section">
             <div className="pdp-size-header">
@@ -213,53 +190,6 @@ export default function ProductDetailPage({
               <p className="pdp-size-error">
                 ⚠️ Please select a size before adding to bag or buying
               </p>
-            )}
-          </div>
-
-          {/* Delivery & Pincode Checker */}
-          <div className="pdp-delivery-card">
-            <div className="pdp-delivery-title">
-              <MapPin size={16} /> Delivery Options
-            </div>
-            <div className="pdp-pincode-input-wrap">
-              <input
-                type="text"
-                maxLength={6}
-                value={pincode}
-                onChange={e => setPincode(e.target.value.replace(/\D/g, ''))}
-                placeholder="Enter 6-digit Pincode"
-                className="pdp-pincode-input"
-              />
-              <button
-                type="button"
-                className="pdp-pincode-btn"
-                onClick={() => setPincodeChecked(true)}
-              >
-                CHECK
-              </button>
-            </div>
-
-            {pincodeChecked && (
-              <div className="pdp-delivery-perks">
-                <div className="pdp-perk-row">
-                  <Truck size={16} className="perk-icon" />
-                  <div>
-                    <strong>FREE Delivery</strong> to {pincode || 'your location'} by <strong>Friday, 9 PM</strong>
-                  </div>
-                </div>
-                <div className="pdp-perk-row">
-                  <RotateCcw size={16} className="perk-icon" />
-                  <div>
-                    <strong>7 Days Easy Replacement & Return</strong> if size doesn't fit
-                  </div>
-                </div>
-                <div className="pdp-perk-row">
-                  <ShieldCheck size={16} className="perk-icon" />
-                  <div>
-                    <strong>Cash on Delivery (COD)</strong> available at checkout
-                  </div>
-                </div>
-              </div>
             )}
           </div>
 

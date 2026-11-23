@@ -1,7 +1,7 @@
-import { Instagram, Twitter, Youtube, Mail, ArrowRight } from 'lucide-react'
+import { Instagram, Mail, ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 
-export default function Footer() {
+export default function Footer({ onCategoryClick, onStoryClick }) {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 
@@ -28,12 +28,6 @@ export default function Footer() {
               <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
                 <Instagram size={17} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter">
-                <Twitter size={17} />
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube">
-                <Youtube size={17} />
-              </a>
             </div>
           </div>
 
@@ -42,30 +36,57 @@ export default function Footer() {
             <div>
               <h4>SHOP</h4>
               <nav>
-                <a href="#shop">All Products</a>
-                <a href="#shop">T-Shirts</a>
-                <a href="#shop">Hoodies</a>
-                <a href="#shop">Bottoms</a>
-                <a href="#shop">Accessories</a>
-              </nav>
-            </div>
-            <div>
-              <h4>BRAND</h4>
-              <nav>
-                <a href="#story">Our Story</a>
-                <a href="#shop">Lookbook</a>
-                <a href="#shop">Collaborations</a>
-                <a href="#shop">Size Guide</a>
+                <a
+                  href="#shop"
+                  onClick={(e) => {
+                    if (onCategoryClick) {
+                      e.preventDefault()
+                      onCategoryClick('ALL')
+                    }
+                  }}
+                >
+                  All Products
+                </a>
+                <a
+                  href="#tshirts"
+                  onClick={(e) => {
+                    if (onCategoryClick) {
+                      e.preventDefault()
+                      onCategoryClick('T-SHIRTS')
+                    }
+                  }}
+                >
+                  T-Shirts
+                </a>
+                <a
+                  href="#hoodies"
+                  onClick={(e) => {
+                    if (onCategoryClick) {
+                      e.preventDefault()
+                      onCategoryClick('HOODIES')
+                    }
+                  }}
+                >
+                  Hoodies
+                </a>
+                <a href="#custom-cups">Custom Cups</a>
+                <a
+                  href="#story"
+                  onClick={(e) => {
+                    if (onStoryClick) {
+                      e.preventDefault()
+                      onStoryClick()
+                    }
+                  }}
+                >
+                  Our Story
+                </a>
               </nav>
             </div>
             <div>
               <h4>SUPPORT</h4>
               <nav>
                 <a href="mailto:hello@rockso.in">Contact Us</a>
-                <a href="#shop">Shipping Policy</a>
-                <a href="#shop">Returns & Refunds</a>
-                <a href="#shop">Track Order</a>
-                <a href="#shop">FAQ</a>
               </nav>
             </div>
           </div>

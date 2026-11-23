@@ -1,30 +1,73 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
-  ArrowDownRight, ArrowRight,
-  Truck, ShieldCheck, RefreshCw, Award, ChevronRight
+  ArrowDownRight, ArrowRight, ChevronRight
 } from 'lucide-react'
 import Header from './components/Header'
 import ProductCard from './components/ProductCard'
 import ProductDetailPage from './components/ProductDetailPage'
+import OurStoryPage from './components/OurStoryPage'
 import CartDrawer from './components/CartDrawer'
 import SearchOverlay from './components/SearchOverlay'
+import CustomCupsSection from './components/CustomCupsSection'
 import Footer from './components/Footer'
 import { products, categories } from './data/products'
 
 export default function App() {
   const [filter, setFilter] = useState('ALL')
   const [cart, setCart] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('rockso-cart') || '[]') } catch { return [] }
+    try {
+      const stored = localStorage.getItem('rockso-cart')
+      if (!stored) return []
+      const parsed = JSON.parse(stored)
+      return Array.isArray(parsed)
+        ? parsed.map(item => {
+            if (item.image && typeof item.image === 'string' && item.image.startsWith('data:') && item.image.length > 30000) {
+              return { ...item, image: `${import.meta.env.BASE_URL}product-01.jpg` }
+            }
+            return item
+          })
+        : []
+    } catch {
+      try { localStorage.removeItem('rockso-cart') } catch {}
+      return []
+    }
   })
   const [cartOpen, setCartOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [quickProduct, setQuickProduct] = useState(null)
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [showStory, setShowStory] = useState(false)
   const [selectedSize, setSelectedSize] = useState('')
   const [notice, setNotice] = useState('')
   const [sizeError, setSizeError] = useState(false)
 
-  // Handle hash for product detail page (Flipkart / Amazon style URL)
+  const handleCategoryNavigate = (cat) => {
+    setFilter(cat)
+    setSelectedProduct(null)
+    setShowStory(false)
+    setTimeout(() => {
+      const shopEl = document.getElementById('shop')
+      if (shopEl) {
+        shopEl.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 50)
+  }
+
+  const handleOpenStory = () => {
+    setSelectedProduct(null)
+    setShowStory(true)
+    window.location.hash = 'story'
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleBackFromStory = () => {
+    setShowStory(false)
+    setSelectedProduct(null)
+    window.location.hash = 'home'
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Handle hash for product detail page (Flipkart / Amazon style URL) & Story
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash
@@ -33,10 +76,40 @@ export default function App() {
         const found = products.find(p => p.id === id)
         if (found) {
           setSelectedProduct(found)
+          setShowStory(false)
           window.scrollTo({ top: 0, behavior: 'smooth' })
         }
+      } else if (hash === '#story' || hash === '#our-story') {
+        setSelectedProduct(null)
+        setShowStory(true)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else if (hash === '#tshirts') {
+        setSelectedProduct(null)
+        setShowStory(false)
+        setFilter('T-SHIRTS')
+        setTimeout(() => {
+          const shopEl = document.getElementById('shop')
+          if (shopEl) shopEl.scrollIntoView({ behavior: 'smooth' })
+        }, 50)
+      } else if (hash === '#hoodies') {
+        setSelectedProduct(null)
+        setShowStory(false)
+        setFilter('HOODIES')
+        setTimeout(() => {
+          const shopEl = document.getElementById('shop')
+          if (shopEl) shopEl.scrollIntoView({ behavior: 'smooth' })
+        }, 50)
+      } else if (hash === '#shop') {
+        setSelectedProduct(null)
+        setShowStory(false)
+        setFilter('ALL')
+        setTimeout(() => {
+          const shopEl = document.getElementById('shop')
+          if (shopEl) shopEl.scrollIntoView({ behavior: 'smooth' })
+        }, 50)
       } else {
         setSelectedProduct(null)
+        setShowStory(false)
       }
     }
     handleHash()
@@ -46,11 +119,13 @@ export default function App() {
 
   const handleSelectProduct = (product) => {
     setSelectedProduct(product)
+    setShowStory(false)
     window.location.hash = `product/${product.id}`
   }
 
   const handleBackToCatalog = () => {
     setSelectedProduct(null)
+    setShowStory(false)
     window.location.hash = 'shop'
   }
 
@@ -60,7 +135,27 @@ export default function App() {
   }
 
   useEffect(() => {
-    localStorage.setItem('rockso-cart', JSON.stringify(cart))
+    try {
+      // Safe serialization: strip massive base64 images if they exceed safe storage size
+      const safeCart = cart.map(item => {
+        if (item.image && typeof item.image === 'string' && item.image.startsWith('data:') && item.image.length > 30000) {
+          return { ...item, image: `${import.meta.env.BASE_URL}product-01.jpg` }
+        }
+        return item
+      })
+      localStorage.setItem('rockso-cart', JSON.stringify(safeCart))
+    } catch (err) {
+      console.warn('Quota exceeded or failed to persist cart to localStorage:', err)
+      try {
+        // Fallback: store minimal metadata
+        const minimalCart = cart.map(({ id, name, size, price, quantity, color }) => ({
+          id, name, size, price, quantity, color, image: `${import.meta.env.BASE_URL}product-01.jpg`
+        }))
+        localStorage.setItem('rockso-cart', JSON.stringify(minimalCart))
+      } catch {
+        // Silent catch so app never crashes
+      }
+    }
   }, [cart])
 
   // Keyboard shortcut for search
@@ -81,7 +176,8 @@ export default function App() {
 
   const visibleProducts = useMemo(() => {
     if (filter === 'ALL') return products
-    return products.filter(p => p.category.toUpperCase() === filter.replace('-', ' '))
+    const clean = str => (str || '').toUpperCase().replace(/[^A-Z]/g, '')
+    return products.filter(p => clean(p.category) === clean(filter))
   }, [filter])
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -140,6 +236,8 @@ export default function App() {
         cartCount={cartCount}
         onCartClick={() => setCartOpen(true)}
         onSearchClick={() => setSearchOpen(true)}
+        onCategoryClick={handleCategoryNavigate}
+        onStoryClick={handleOpenStory}
       />
 
       <main>
@@ -151,11 +249,19 @@ export default function App() {
             onAddToCart={addToCart}
             onBuyNow={handleBuyNow}
           />
+        ) : showStory ? (
+          <OurStoryPage
+            onBack={handleBackFromStory}
+            onExploreShop={() => {
+              setShowStory(false)
+              handleCategoryNavigate('ALL')
+            }}
+          />
         ) : (
           <>
             {/* ── HERO ── */}
         <section className="hero" id="home-hero">
-          <img src={`${import.meta.env.BASE_URL}hero-bg.jpg`} alt="ROCKSO — Define Your Own" className="hero-img" loading="eager" fetchPriority="high" decoding="sync" />
+          <img src={`${import.meta.env.BASE_URL}hero-bg.jpg`} alt="ROCKSO — Define Your Own" className="hero-img" loading="eager" fetchpriority="high" decoding="sync" />
           <div className="hero-overlay" />
 
           {/* CTA pinned bottom-left */}
@@ -163,7 +269,14 @@ export default function App() {
             <a className="btn btn-white" href="#shop">
               SHOP THE DROP <ArrowRight size={15} />
             </a>
-            <a className="btn btn-ghost-light" href="#story">
+            <a
+              className="btn btn-ghost-light"
+              href="#story"
+              onClick={(e) => {
+                e.preventDefault()
+                handleOpenStory()
+              }}
+            >
               OUR STORY <ChevronRight size={15} />
             </a>
           </div>
@@ -311,87 +424,36 @@ export default function App() {
               />
             ))}
           </div>
-
-          <p className="demo-note">
-            ⚠ DEMO PRODUCTS & PLACEHOLDER IMAGES — Replace with your real ROCKSO inventory before launch.
-          </p>
         </section>
 
         {/* ── STATEMENT ── */}
         <section className="statement">
-          <div className="statement-mark">R.</div>
-          <p>DON'T FOLLOW THE FIT.<br /><strong>DEFINE YOUR OWN.</strong></p>
-          <span>ROCKSO™ · EST. 2026</span>
-        </section>
-
-        {/* ── PERKS ── */}
-        <section className="perks">
-          <div className="perk">
-            <div className="perk-icon"><Truck size={22} /></div>
-            <h3>PAN-INDIA DELIVERY</h3>
-            <p>Free shipping on orders over ₹1,999</p>
-          </div>
-          <div className="perk">
-            <div className="perk-icon"><ShieldCheck size={22} /></div>
-            <h3>SECURE CHECKOUT</h3>
-            <p>Razorpay & UPI integration coming soon</p>
-          </div>
-          <div className="perk">
-            <div className="perk-icon"><RefreshCw size={22} /></div>
-            <h3>EASY RETURNS</h3>
-            <p>7-day hassle-free return policy</p>
-          </div>
-          <div className="perk">
-            <div className="perk-icon"><Award size={22} /></div>
-            <h3>PREMIUM QUALITY</h3>
-            <p>320+ GSM cotton, built to last</p>
+          <div
+            className="statement-bg"
+            style={{ backgroundImage: `url(${import.meta.env.BASE_URL}hero-bg.jpg)` }}
+            aria-hidden="true"
+          />
+          <div className="statement-overlay" aria-hidden="true" />
+          <div className="statement-content">
+            <div className="statement-mark">R.</div>
+            <p>DON'T FOLLOW THE FIT.<br /><strong>DEFINE YOUR OWN.</strong></p>
+            <span>ROCKSO™ · EST. 2026</span>
           </div>
         </section>
 
-        {/* ── INSTAGRAM STRIP ── */}
-        <section className="insta-strip">
-          <div className="insta-heading">
-            <span className="eyebrow">FOLLOW THE MOVEMENT</span>
-            <h2>@ROCKSO_OFFICIAL</h2>
-          </div>
-          <div className="insta-grid">
-            {[
-              'https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=400&q=80',
-              'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=400&q=80',
-              'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=400&q=80',
-              'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=400&q=80',
-              'https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=400&q=80',
-              'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=400&q=80',
-            ].map((src, i) => (
-              <a
-                key={i}
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="insta-cell"
-                aria-label="View on Instagram"
-              >
-                <img src={src} alt="" loading="lazy" />
-                <div className="insta-hover">
-                  <span>VIEW</span>
-                </div>
-              </a>
-            ))}
-          </div>
-          <a
-            className="btn btn-black insta-cta"
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            FOLLOW @ROCKSO_OFFICIAL
-          </a>
-        </section>
+        {/* ── CUSTOM DRINKWARE & CUPS CONTAINER ── */}
+        <CustomCupsSection
+          onAddToCart={addToCart}
+          onOpenCart={() => setCartOpen(true)}
+        />
           </>
         )}
       </main>
 
-      <Footer />
+      <Footer
+        onCategoryClick={handleCategoryNavigate}
+        onStoryClick={handleOpenStory}
+      />
 
       {/* ── CART DRAWER ── */}
       <CartDrawer
