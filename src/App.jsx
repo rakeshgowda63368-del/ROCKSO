@@ -10,6 +10,7 @@ import CartDrawer from './components/CartDrawer'
 import SearchOverlay from './components/SearchOverlay'
 import CustomCupsSection from './components/CustomCupsSection'
 import Footer from './components/Footer'
+import CheckoutModal from './components/CheckoutModal'
 import { products, categories } from './data/products'
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
   const [selectedSize, setSelectedSize] = useState('')
   const [notice, setNotice] = useState('')
   const [sizeError, setSizeError] = useState(false)
+  const [checkoutOpen, setCheckoutOpen] = useState(false)
 
   const handleCategoryNavigate = (cat) => {
     setFilter(cat)
@@ -131,7 +133,8 @@ export default function App() {
 
   const handleBuyNow = (product, size) => {
     addToCart(product, size)
-    setCartOpen(true)
+    setCartOpen(false)
+    setCheckoutOpen(true)
   }
 
   useEffect(() => {
@@ -214,9 +217,8 @@ export default function App() {
   }
 
   function checkout() {
-    setNotice('Checkout coming soon. Connect Razorpay + shipping before accepting real orders.')
     setCartOpen(false)
-    setTimeout(() => setNotice(''), 7000)
+    setCheckoutOpen(true)
   }
 
   function openQuick(product) {
@@ -524,6 +526,17 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* ── CHECKOUT & DELIVERY MODAL (Razorpay + WhatsApp / Email replication) ── */}
+      <CheckoutModal
+        open={checkoutOpen}
+        onClose={() => setCheckoutOpen(false)}
+        cart={cart}
+        onClearCart={() => {
+          setCart([])
+          try { localStorage.removeItem('rockso-cart') } catch {}
+        }}
+      />
 
       {/* ── NOTICE TOAST ── */}
       {notice && (
